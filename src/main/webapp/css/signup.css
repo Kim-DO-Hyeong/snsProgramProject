@@ -1,0 +1,43 @@
+a{
+    text-decoration: none;
+}
+
+
+/*main*/
+.form-login{
+    margin: 0 auto;
+    max-width: 400px;
+}
+
+form{
+    text-align: center;
+    margin-top: 100px;
+
+    border: 1px solid lightgray;
+    padding:20px;
+    border-radius: 5px;
+}
+
+.checkbox label{
+    float: left;
+    margin :10px 0;
+}
+
+
+.btnArea button{
+    margin-top: 10px;
+
+}
+
+.terms{
+    overflow: scroll;
+    height: 300px;
+    overflow-x: hidden;
+}
+
+
+
+
+
+
+/*main*/
