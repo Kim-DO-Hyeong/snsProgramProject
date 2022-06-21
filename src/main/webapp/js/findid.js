@@ -10,6 +10,11 @@ $("input[type=radio], .form-check-label").on("click",function(){
 
 $("#findId_button").on("click",function(){
     		let $name = $("#findId").val();
+    		
+    		if(!isCorrectName($name)){
+				return ;
+			}
+    		
     		$.ajax({
     			url:"/sns/findid",
     			type:"GET",

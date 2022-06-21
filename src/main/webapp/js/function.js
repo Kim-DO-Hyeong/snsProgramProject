@@ -41,7 +41,7 @@
 		alert("이름을 입력하세요");
 		return false;
 	}else if(name.length < 2 || name.length > 5 ){
-		alert("아이디는 2자 이상 5자 이하입니다");
+		alert("이름은 2자 이상 5자 이하입니다");
 		return false;
 	}
 	let regExp = /^[ㄱ-힣]+$/;
