@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
+import Util.DatabaseManager;
 import signUp.Join;
 import signUp.Member;
 
@@ -36,11 +37,10 @@ public class FindPw2 extends HttpServlet {
 				ResultSet rs = null;
 				
 				try {
-					Class.forName("org.mariadb.jdbc.Driver");
-					conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/snsdb?user=root&password=1234");
+					conn = DatabaseManager.getConnection();
 
 					String sql = "SELECT * FROM membertbl WHERE name = ? AND birth = ?";
-					pstmt = conn.prepareStatement(sql);
+					pstmt = DatabaseManager.getPstmt(conn, sql);
 					pstmt.setString(1, name);
 					pstmt.setDate(2, Date.valueOf(birth));
 					
@@ -81,32 +81,12 @@ public class FindPw2 extends HttpServlet {
 					}
 					
 				
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				} finally {
-					try {
-						if(rs !=null) {
-							rs.close();
-						}
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-					try {
-						if(pstmt != null) {
-						pstmt.close();
-						}
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-					try {
-						if(conn!=null) {
-						conn.close();
-						}
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
+					DatabaseManager.closeResultSet(rs);
+					DatabaseManager.closePstmt(pstmt);
+					DatabaseManager.closeConn(conn);
 				}
 						
 						

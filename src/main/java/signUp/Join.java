@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Util.DatabaseManager;
+
 @WebServlet("/join")
 
 
@@ -42,11 +44,10 @@ public class Join extends HttpServlet {
 		PreparedStatement pstmt = null;
 
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/snsdb?user=root&password=1234");
+			conn = DatabaseManager.getConnection();
 
 			String sql = "INSERT INTO membertbl VALUES(?,?,?,?)";
-			pstmt = conn.prepareStatement(sql);
+			pstmt = DatabaseManager.getPstmt(conn, sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, pw);
 			pstmt.setString(3, name);
@@ -60,25 +61,11 @@ public class Join extends HttpServlet {
 				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			}
 
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				if (pstmt != null) {
-					pstmt.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			try {
-				if (conn != null) {
-					conn.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			DatabaseManager.closePstmt(pstmt);
+			DatabaseManager.closeConn(conn);
 		}
 		// DB 연동 -end
 
