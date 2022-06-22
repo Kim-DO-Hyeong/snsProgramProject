@@ -1,19 +1,19 @@
-package signUp;
+package member.dto;
 
 import java.time.LocalDate;
 
-public class Member {
+public class MemberInfo {
 	private String id;
 	private String pw;
 	private String name;
 	private LocalDate birth;
 	
-	public Member(String id, String pw) {
+	public MemberInfo(String id, String pw) {
 		this.id = id;
 		this.pw = pw;
 	}
 	
-	public Member(String id, String pw, String name, LocalDate birth) {
+	public MemberInfo(String id, String pw, String name, LocalDate birth) {
 		this.id = id;
 		this.pw = pw;
 		this.name = name;

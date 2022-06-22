@@ -1,11 +1,10 @@
-package Util;
+package util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class DatabaseManager {
 
@@ -15,7 +14,7 @@ public class DatabaseManager {
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
 			
-			conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/snsdb?user=root&password=1234");
+			conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/sns?user=root&password=1234");
 		
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
